@@ -1,7 +1,7 @@
 import express from "express"
 import sql from "mysql"
 
-con = sql.createConnection({
+const con = sql.createConnection({
   host: "localhost",
   user: "will",
   password: "sup3rs3cr3tp4assw0rd",
