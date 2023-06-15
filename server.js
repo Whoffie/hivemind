@@ -19,7 +19,7 @@ app.get("/hive/", (req, res) => {
   if (!req.query.temperature || !req.query.humidity) {
     res.send("Invalid request")
   }else {
-    let stmt = "INSERT INTO `hive` (`temperature`, `humidity`, `date`, `time`) VALUES (`?`, `?`, `?`, `?`)"
+    let stmt = "INSERT INTO `data` (`temperature`, `humidity`, `date`, `time`) VALUES (?, ?, ?, ?)"
     let current = new Date()
 
     let date = current.getMonth() + "/" + current.getDay() + "/" + current.getFullYear()
