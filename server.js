@@ -24,7 +24,12 @@ app.get("/hive/", (req, res) => {
     let current = new Date()
 
     let date = current.getMonth() + "/" + current.getDay() + "/" + current.getFullYear()
-    let time = current.getHours() + ":" + current.getMinutes()
+    
+    if (current.getMinutes() < 10) {
+      let time = current.getHours() + ":0" + current.getMinutes()
+    }else {
+      let time = current.getHours() + ":" + current.getMinutes()
+    }
 
     con.query(stmt, [req.query.temperature, req.query.humidity, date, time], (err) => {
       if (err) {
