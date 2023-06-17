@@ -12,8 +12,9 @@ con.connect()
 
 const app = express()
 
-app.use(express.json())
+app.set("view engine", "hbs")
 app.use(express.static("public"))
+app.use(express.json())
 
 app.get("/hive/", (req, res) => {
   if (!req.query.temperature || !req.query.humidity) {
@@ -35,6 +36,10 @@ app.get("/hive/", (req, res) => {
   }
 })
 
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard")
+})
+
 app.listen(3000, () => {
   console.log("Server is Running!");
-});
+})
