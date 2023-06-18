@@ -1,10 +1,11 @@
 import express from "express"
 import sql from "mysql"
+import "dotenv/config"
 
 const con = sql.createConnection({
   host: "localhost",
   user: "will",
-  password: "sup3rs3cr3tp4assw0rd",
+  password: process.env.DB_PASSWORD,
   database: "hive"
 })
 
