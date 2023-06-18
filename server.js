@@ -27,17 +27,25 @@ app.get("/hive/", (req, res) => {
     
     if (current.getMinutes() < 10) {
       let time = current.getHours() + ":0" + current.getMinutes()
+
+      con.query(stmt, [req.query.temperature, req.query.humidity, date, time], (err) => {
+        if (err) {
+          res.send(err)
+        }else {
+          res.send("Success.")
+        }
+      })
     }else {
       let time = current.getHours() + ":" + current.getMinutes()
-    }
 
-    con.query(stmt, [req.query.temperature, req.query.humidity, date, time], (err) => {
-      if (err) {
-        res.send(err)
-      }else {
-        res.send("Success.")
-      }
-    })
+      con.query(stmt, [req.query.temperature, req.query.humidity, date, time], (err) => {
+        if (err) {
+          res.send(err)
+        }else {
+          res.send("Success.")
+        }
+      })
+    }
   }
 })
 
