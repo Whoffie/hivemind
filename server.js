@@ -24,7 +24,7 @@ app.get("/hive/", (req, res) => {
     let stmt = "INSERT INTO `data` (`temperature`, `humidity`, `date`, `time`) VALUES (?, ?, ?, ?)"
     let current = new Date()
 
-    let date = current.getMonth() + "/" + current.getDay() + "/" + current.getFullYear()
+    let date = current.getMonth() + "/" + current.getDate() + "/" + current.getFullYear()
     
     if (current.getMinutes() < 10) {
       let time = current.getHours() + ":0" + current.getMinutes()
