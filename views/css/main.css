@@ -1,0 +1,22 @@
+body {
+    background-color: #095fe0;
+    font-family: sans-serif;
+}
+
+#left-container {
+    float: left;
+    background-color: white;
+    box-shadow: 5px 10px;
+    margin: 50px 50px 50px 50px;
+    padding: 30px 30px 30px 30px;
+    width: 40%;
+}
+
+#right-container {
+    float: right;
+    background-color: white;
+    box-shadow: 5px 10px;
+    margin: 50px 50px 50px 50px;
+    padding: 30px 30px 30px 30px;
+    width: 40%;
+}

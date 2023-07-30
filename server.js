@@ -14,7 +14,7 @@ con.connect()
 const app = express()
 
 app.set("view engine", "hbs")
-app.use(express.static("public"))
+app.use(express.static("views"))
 app.use(express.json())
 
 app.get("/hive/", (req, res) => {
@@ -51,7 +51,15 @@ app.get("/hive/", (req, res) => {
 })
 
 app.get("/dashboard", (req, res) => {
-  res.render("dashboard")
+  con.query("SELECT `temperature`, `humidity`, `time` FROM `data` ORDER BY `id` ASC LIMIT 24", (err, result) => {
+    let temperatures = []
+
+    for (let i = 0; i < result.length; i++) {
+      temperatures.push(result[i])
+    }
+
+    res.render("dashboard", {temperatures: temperatures})
+  })
 })
 
 app.listen(3000, () => {

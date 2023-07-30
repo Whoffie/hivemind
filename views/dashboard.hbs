@@ -4,8 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hive Dashboard</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    
+    <div id="left-container">
+        <h1>Hive Temperature</h1>
+        <canvas id="temperature"></canvas>
+    </div>
+    <div id="right-container">
+        <h1>Hive Humidity</h1>
+        <canvas id="humidity"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const tempgraph = document.getElementById('temperature').getContext('2d')
+        const humiditygraph = document.getElementById('humidity').getContext('2d')
+
+        const tempdata = {
+            labels: [{{#each temperatures}}"{{this.time}}",{{/each}}],
+            datasets: [{
+                label: 'Temperatures',
+                data: [{{#each temperatures}}"{{this.temperature}}",{{/each}}],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false,
+            }]
+        }
+        new Chart(tempgraph, {
+            type: 'line',
+            data: tempdata,
+        })
+
+        const humiditydata = {
+            labels: [{{#each temperatures}}"{{this.time}}",{{/each}}],
+            datasets: [{
+                label: 'Temperatures',
+                data: [{{#each temperatures}}"{{this.humidity}}",{{/each}}],
+                borderColor: 'rgba(245, 39, 39, 0.8)',
+                borderWidth: 1,
+                fill: false,
+            }]
+        }
+        new Chart(humiditygraph, {
+            type: 'line',
+            data: humiditydata,
+        })
+    </script>
 </body>
 </html>
