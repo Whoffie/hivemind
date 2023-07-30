@@ -2,6 +2,20 @@ import express from "express"
 import sql from "mysql"
 import "dotenv/config"
 
+function getSeason() { // remember .getMonth() ranges from 0-11, not 1-12
+  let now = new Date()
+
+  if (now.getMonth() > 9 && now.getMonth() < 3) { // determine Winter
+    return 0
+  }else if (now.getMonth() > 8 && now.getMonth() < 10) { // determine Fall
+    return 1
+  }else if (now.getMonth() > 3 && now.getMonth() < 6) { // determine Spring
+    return 2
+  }else if (now.getMonth() >= 6 && now.getMonth() < 8) { // determine Summer
+    return 3
+  }
+}
+
 const con = sql.createConnection({
   host: process.env.DB_HOST,
   user: "will",
@@ -60,7 +74,45 @@ app.get("/dashboard", (req, res) => {
 
     temperatures = temperatures.reverse()
 
-    res.render("dashboard", {temperatures: temperatures})
+    if (getSeason() == 0) { // these temp minimums are very much subject to change
+      if (temperatures[temperatures.length - 1].temperature > 40) { // fetch last temp reading
+        var tempstatus = true
+      }else {
+        var tempstatus = false
+      }
+    }
+
+    if (getSeason() == 1) {
+      if (temperatures[temperatures.length - 1].temperature > 50) {
+        var tempstatus = true
+      }else {
+        var tempstatus = false
+      }
+    }
+
+    if (getSeason() == 2) {
+      if (temperatures[temperatures.length - 1].temperature > 90 && temperatures[temperatures.length - 1].temperature < 100) {
+        var tempstatus = true
+      }else {
+        var tempstatus = false
+      }
+    }
+
+    if (getSeason() == 3) {
+      if (temperatures[temperatures.length - 1].temperature > 90 && temperatures[temperatures.length - 1].temperature < 100) {
+        var tempstatus = true
+      }else {
+        var tempstatus = false
+      }
+    }
+
+    if (temperatures[temperatures.length - 1].humidity >= 50 && temperatures[temperatures.length - 1].humidity <= 60) {
+      var humiditystatus = true
+    }else {
+      var humiditystatus = false
+    }
+
+    res.render("dashboard", {temperatures: temperatures, tempstatus: tempstatus, humiditystatus: humiditystatus})
   })
 })
 
