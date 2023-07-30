@@ -33,3 +33,15 @@ body {
 .bad {
     color: #d67d18;
 }
+
+@media only screen and (max-width: 1650px) {
+    #left-container {
+        float: none;
+        width: 90%;
+    }
+    
+    #right-container {
+        float: none;
+        width: 90%;
+    }
+  }
