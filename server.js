@@ -51,12 +51,14 @@ app.get("/hive/", (req, res) => {
 })
 
 app.get("/dashboard", (req, res) => {
-  con.query("SELECT `temperature`, `humidity`, `time` FROM `data` ORDER BY `id` ASC LIMIT 24", (err, result) => {
+  con.query("SELECT `temperature`, `humidity`, `time` FROM `data` ORDER BY `id` DESC LIMIT 24", (err, result) => {
     let temperatures = []
 
     for (let i = 0; i < result.length; i++) {
       temperatures.push(result[i])
     }
+
+    temperatures = temperatures.reverse()
 
     res.render("dashboard", {temperatures: temperatures})
   })
