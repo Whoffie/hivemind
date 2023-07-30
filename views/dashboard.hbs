@@ -38,7 +38,7 @@
         const humiditydata = {
             labels: [{{#each temperatures}}"{{this.time}}",{{/each}}],
             datasets: [{
-                label: 'Temperatures',
+                label: 'Humidity (%)',
                 data: [{{#each temperatures}}"{{this.humidity}}",{{/each}}],
                 borderColor: 'rgba(245, 39, 39, 0.8)',
                 borderWidth: 1,
