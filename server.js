@@ -75,7 +75,7 @@ app.get("/dashboard", (req, res) => {
     temperatures = temperatures.reverse()
 
     if (getSeason() == 0) { // these temp minimums are very much subject to change
-      if (temperatures[temperatures.length - 1].temperature > 30) { // fetch last temp reading
+      if (temperatures[temperatures.length - 1].temperature > 32) { // fetch last temp reading
         var tempstatus = true
       }else {
         var tempstatus = false
@@ -99,7 +99,7 @@ app.get("/dashboard", (req, res) => {
     }
 
     if (getSeason() == 3) {
-      if (temperatures[temperatures.length - 1].temperature > 90 && temperatures[temperatures.length - 1].temperature < 100) {
+      if (temperatures[temperatures.length - 1].temperature >= 90 && temperatures[temperatures.length - 1].temperature < 100) {
         var tempstatus = true
       }else {
         var tempstatus = false
