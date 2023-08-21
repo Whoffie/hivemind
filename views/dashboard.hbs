@@ -33,10 +33,21 @@
         </div>        
     {{/if}}
     </div>
+    <div id="left-container">
+        <h1>Outside Temperature</h1>
+        {{!-- <canvas id="weather"></canvas> implement this later  --}}
+    </div>
+    <div id="right-container">
+        <h1>Hive Weight</h1>
+        <canvas id="weight"></canvas>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const tempgraph = document.getElementById('temperature').getContext('2d')
         const humiditygraph = document.getElementById('humidity').getContext('2d')
+      //  const weathergraph = document.getElementById('weather').getContext('2d') // implement this later
+        const weightgraph = document.getElementById('weight').getContext('2d')
+
 
         const tempdata = {
             labels: [{{#each temperatures}}"{{this.time}}",{{/each}}],
@@ -66,6 +77,21 @@
         new Chart(humiditygraph, {
             type: 'line',
             data: humiditydata,
+        })
+
+        const weightdata = {
+            labels: [{{#each temperatures}}"{{this.time}}",{{/each}}],
+            datasets: [{
+                label: 'Weight (lbs)',
+                data: [{{#each temperatures}}"{{this.weight}}",{{/each}}],
+                borderColor: 'rgba(50, 255, 145, 0.8)',
+                borderWidth: 1,
+                fill: false,
+            }]
+        }
+        new Chart(weightgraph, {
+            type: 'line',
+            data: weightdata,
         })
     </script>
 </body>
